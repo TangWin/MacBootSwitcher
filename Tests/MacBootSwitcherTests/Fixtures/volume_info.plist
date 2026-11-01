@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>/</key>
+	<dict>
+		<key>APFSSnapshot</key>
+		<true/>
+		<key>APFSVolumeGroupID</key>
+		<string>11111111-1111-1111-1111-111111111111</string>
+		<key>Locked</key>
+		<false/>
+		<key>MountPoint</key>
+		<string>/</string>
+		<key>VolumeUUID</key>
+		<string>77777777-7777-7777-7777-777777777777</string>
+	</dict>
+	<key>/Volumes/SyntheticCurrent</key>
+	<dict>
+		<key>APFSVolumeGroupID</key>
+		<string>11111111-1111-1111-1111-111111111111</string>
+		<key>Internal</key>
+		<true/>
+		<key>Locked</key>
+		<false/>
+		<key>MountPoint</key>
+		<string>/Volumes/SyntheticCurrent</string>
+		<key>VolumeName</key>
+		<string>Synthetic macOS</string>
+		<key>VolumeUUID</key>
+		<string>22222222-2222-2222-2222-222222222222</string>
+	</dict>
+	<key>/Volumes/SyntheticTarget</key>
+	<dict>
+		<key>APFSVolumeGroupID</key>
+		<string>33333333-3333-3333-3333-333333333333</string>
+		<key>Internal</key>
+		<true/>
+		<key>Locked</key>
+		<false/>
+		<key>MountPoint</key>
+		<string>/Volumes/SyntheticTarget</string>
+		<key>VolumeName</key>
+		<string>Synthetic macOS</string>
+		<key>VolumeUUID</key>
+		<string>44444444-4444-4444-4444-444444444444</string>
+	</dict>
+	<key>disk99s1</key>
+	<dict>
+		<key>APFSVolumeGroupID</key>
+		<string>11111111-1111-1111-1111-111111111111</string>
+		<key>Internal</key>
+		<true/>
+		<key>Locked</key>
+		<false/>
+		<key>MountPoint</key>
+		<string>/Volumes/SyntheticCurrent</string>
+		<key>VolumeName</key>
+		<string>Synthetic macOS</string>
+		<key>VolumeUUID</key>
+		<string>22222222-2222-2222-2222-222222222222</string>
+	</dict>
+	<key>disk99s2</key>
+	<dict>
+		<key>APFSVolumeGroupID</key>
+		<string>11111111-1111-1111-1111-111111111111</string>
+		<key>Locked</key>
+		<false/>
+		<key>VolumeUUID</key>
+		<string>55555555-5555-5555-5555-555555555555</string>
+	</dict>
+	<key>disk99s3</key>
+	<dict>
+		<key>APFSVolumeGroupID</key>
+		<string>33333333-3333-3333-3333-333333333333</string>
+		<key>Internal</key>
+		<true/>
+		<key>Locked</key>
+		<false/>
+		<key>MountPoint</key>
+		<string>/Volumes/SyntheticTarget</string>
+		<key>VolumeName</key>
+		<string>Synthetic macOS</string>
+		<key>VolumeUUID</key>
+		<string>44444444-4444-4444-4444-444444444444</string>
+	</dict>
+	<key>disk99s4</key>
+	<dict>
+		<key>APFSVolumeGroupID</key>
+		<string>33333333-3333-3333-3333-333333333333</string>
+		<key>Locked</key>
+		<false/>
+		<key>VolumeUUID</key>
+		<string>66666666-6666-6666-6666-666666666666</string>
+	</dict>
+</dict>
+</plist>
