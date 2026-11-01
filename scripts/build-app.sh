@@ -7,9 +7,11 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
 APP_NAME="MacBootSwitcher"
+APP_VERSION="0.1.0"
 BUILD_DIR="${PROJECT_DIR}/.build/release"
 OUTPUT_DIR="${PROJECT_DIR}/dist"
 APP_BUNDLE="${OUTPUT_DIR}/${APP_NAME}.app"
+ZIP_NAME="${APP_NAME}-v${APP_VERSION}-macOS.zip"
 
 echo "==> 正在编译 Release 版本..."
 cd "${PROJECT_DIR}"
@@ -53,7 +55,7 @@ cat <<EOF > "${APP_BUNDLE}/Contents/Info.plist"
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>0.1.0</string>
+    <string>${APP_VERSION}</string>
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>LSMinimumSystemVersion</key>
@@ -69,4 +71,10 @@ EOF
 echo "==> 执行 ad-hoc 签名..."
 codesign --force --deep --sign - "${APP_BUNDLE}"
 
-echo "==> 打包完成：${APP_BUNDLE}"
+echo "==> 生成 Release 压缩包..."
+rm -f "${OUTPUT_DIR}/${ZIP_NAME}"
+ditto -c -k --sequesterRsrc --keepParent "${APP_BUNDLE}" "${OUTPUT_DIR}/${ZIP_NAME}"
+
+echo "==> 打包完成："
+echo "    App 路径:    ${APP_BUNDLE}"
+echo "    Release 包:  ${OUTPUT_DIR}/${ZIP_NAME}"

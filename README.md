@@ -38,9 +38,34 @@ MacBootSwitcher/
     └── check-status.sh        # 只读系统启动与 APFS 状态检查脚本
 ```
 
-## 真实命令与操作指南
+## 安装与使用方式
 
-### 1. 构建与编译
+### 方式一：直接下载安装（推荐，免源码编译）
+
+针对普通用户和相关测试人员，提供预编译的正式发布包，无需安装 Xcode 或配置 Swift 编译环境：
+
+1. **下载 Release 预编译包**：
+   前往 GitHub [Releases](https://github.com/TangWin/MacBootSwitcher/releases) 页面，下载最新发布的 `MacBootSwitcher-v0.1.0-macOS.zip`。
+2. **解压与安装**：
+   解压后得到 `MacBootSwitcher.app`，将其拖入 `/Applications`（“应用程序”）目录。
+3. **首次打开安全提示处理（Gatekeeper 隔离属性清除）**：
+   由于发布包采用本地 ad-hoc 签名（未购买 Apple Developer 付费证书公证），macOS 首次打开可能会提示“无法打开，因为无法验证开发者”或“已损坏”。
+   - **方式 A（系统设置允许）**：打开 macOS「系统设置」→「隐私与安全性」，滑到底部安全性区域，点击「仍要打开」。
+   - **方式 B（终端命令清除）**：在终端执行以下命令清除隔离属性：
+     ```bash
+     xattr -cr /Applications/MacBootSwitcher.app
+     ```
+4. **运行与交互流程**：
+   - 启动应用，程序将扫描并列出本机合法的 APFS 系统卷候选。
+   - 选择下一次启动的目标系统，点击「继续…」。
+   - 在确认页面核对目标卷信息与拥有者账户，点击「认证并重启」。
+   - 系统将弹出管理员提权弹窗，输入密码授权后程序通过 `bless --nextonly` 完成一次性目标写入并请求系统正常重启。
+
+---
+
+### 方式二：源码构建与运行（面向开发者）
+
+#### 1. 构建与编译
 
 项目基于纯 Swift Package Manager 构建，无需独立安装 Xcode.app（支持 Command Line Tools）：
 
@@ -52,7 +77,7 @@ swift build
 swift build -c release
 ```
 
-### 2. 运行自动化测试
+#### 2. 运行自动化测试
 
 扫描使用真实解析器与脱敏 fixture；执行器测试运行非特权 `sh/head/sleep/cat/printf`。启动写入和重启边界使用模拟执行器，**不会调用真实 bless 写入或重启机器**。当前 CLT 环境通过脚本加载 TestingMacros：
 
@@ -62,17 +87,17 @@ swift build -c release
 
 当前执行结果：5 个测试套件，38 个测试用例全部通过。环境和命令限制详见 [验证记录](docs/validation.md)。
 
-### 3. 应用打包与签名
+#### 3. 应用打包与签名
 
-使用提供的脚本将产物组装为 macOS 标准应用程序并执行本地 ad-hoc 签名：
+使用提供的脚本将产物组装为 macOS 标准应用程序、生成 Release 压缩包并执行本地 ad-hoc 签名：
 
 ```bash
 ./scripts/build-app.sh
 ```
 
-打包产物位于 `dist/MacBootSwitcher.app`。
+打包产物位于 `dist/MacBootSwitcher.app` 及 `dist/MacBootSwitcher-v0.1.0-macOS.zip`。
 
-### 4. 运行应用
+#### 4. 运行应用
 
 可以通过终端直接运行或在 Finder 中打开：
 
@@ -84,7 +109,7 @@ swift build -c release
 open dist/MacBootSwitcher.app
 ```
 
-### 5. 只读系统状态检查
+#### 5. 只读系统状态检查
 
 可运行只读检查脚本查看系统工具报告的启动设备与 APFS 卷组；不能把单项 `bless --getBoot` 输出解释为一次性目标读回或持久默认未变的完整证明：
 
@@ -92,7 +117,7 @@ open dist/MacBootSwitcher.app
 ./scripts/check-status.sh
 ```
 
-### 6. 清理与卸载
+#### 6. 清理与卸载
 
 ```bash
 # 清理构建产物与打包目录
